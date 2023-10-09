@@ -61,12 +61,12 @@ internal class GildedRoseTest {
 
     @TestFactory
     fun `Aged Brie actually increases in Quality the older it gets`() = listOf(
-        Item("Aged Brie", 1, 48) to 49,
-        Item("Aged Brie", 0, 50) to 50,
-        Item("Aged Brie", 0, 49) to 50,
-        Item("Aged Brie", 0, 48) to 50,
-        Item("Aged Brie", 0, 0) to 2,
-        Item("Aged Brie", -1, 0) to 2
+        Item(AGED_BRIE, 1, 48) to 49,
+        Item(AGED_BRIE, 0, 50) to 50,
+        Item(AGED_BRIE, 0, 49) to 50,
+        Item(AGED_BRIE, 0, 48) to 50,
+        Item(AGED_BRIE, 0, 0) to 2,
+        Item(AGED_BRIE, -1, 0) to 2
     ).map { (item, expectedQuality) ->
         dynamicTest("with $item updateQuality results in a quality of $expectedQuality") {
             val app = getGildedRoseWithItem(item)
@@ -77,9 +77,9 @@ internal class GildedRoseTest {
 
     @TestFactory
     fun `The Quality of an item is never more than 50`() = listOf(
-        Item("Aged Brie", 1, 49) to 50,
-        Item("Aged Brie", 1, 50) to 50,
-        Item("Backstage passes to a TAFKAL80ETC concert", 1, 49) to 50,
+        Item(AGED_BRIE, 1, 49) to 50,
+        Item(AGED_BRIE, 1, 50) to 50,
+        Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 1, 49) to 50,
     ).map { (item, expectedQuality) ->
         dynamicTest("with $item updateQuality results in a quality of $expectedQuality") {
             val app = getGildedRoseWithItem(item)
@@ -90,8 +90,8 @@ internal class GildedRoseTest {
 
     @TestFactory
     fun `Sulfuras, being a legendary item, never has to be sold or decreases in Quality`() = listOf(
-        Item("Sulfuras, Hand of Ragnaros", 0, 80) to Item("Sulfuras, Hand of Ragnaros", 0, 80),
-        Item("Sulfuras, Hand of Ragnaros", -1, 80) to Item("Sulfuras, Hand of Ragnaros", -1, 80)
+        Item(SULFURAS_HAND_OF_RAGNAROS, 0, 80) to Item(SULFURAS_HAND_OF_RAGNAROS, 0, 80),
+        Item(SULFURAS_HAND_OF_RAGNAROS, -1, 80) to Item(SULFURAS_HAND_OF_RAGNAROS, -1, 80)
     ).map { (item, expected) ->
         dynamicTest("with $item updateQuality keep existing values like $expected") {
             val app = getGildedRoseWithItem(item)
@@ -106,8 +106,8 @@ internal class GildedRoseTest {
     inner class backStagePassesTest {
         @TestFactory
         fun `Backstage passes, increases quality by 1 when there are 11 days or more`() = listOf(
-            Item("Backstage passes to a TAFKAL80ETC concert", 11, 0) to 1,
-            Item("Backstage passes to a TAFKAL80ETC concert", 12, 2) to 3,
+            Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 11, 0) to 1,
+            Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 12, 2) to 3,
 
             ).map { (item, expectedQuality) ->
             dynamicTest("with $item updateQuality results in a quality of $expectedQuality") {
@@ -119,11 +119,11 @@ internal class GildedRoseTest {
 
         @TestFactory
         fun `Backstage passes, increases quality by 2 when there are 10 days or less`() = listOf(
-            Item("Backstage passes to a TAFKAL80ETC concert", 10, 2) to 4,
-            Item("Backstage passes to a TAFKAL80ETC concert", 9, 2) to 4,
-            Item("Backstage passes to a TAFKAL80ETC concert", 8, 2) to 4,
-            Item("Backstage passes to a TAFKAL80ETC concert", 7, 2) to 4,
-            Item("Backstage passes to a TAFKAL80ETC concert", 6, 2) to 4,
+            Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 10, 2) to 4,
+            Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 9, 2) to 4,
+            Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 8, 2) to 4,
+            Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 7, 2) to 4,
+            Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 6, 2) to 4,
         ).map { (item, expectedQuality) ->
             dynamicTest("with $item updateQuality results in a quality of $expectedQuality") {
                 val app = getGildedRoseWithItem(item)
@@ -134,11 +134,11 @@ internal class GildedRoseTest {
 
         @TestFactory
         fun `Backstage passes, increases quality by 3 when there are 5 days or less`() = listOf(
-            Item("Backstage passes to a TAFKAL80ETC concert", 5, 2) to 5,
-            Item("Backstage passes to a TAFKAL80ETC concert", 4, 2) to 5,
-            Item("Backstage passes to a TAFKAL80ETC concert", 3, 2) to 5,
-            Item("Backstage passes to a TAFKAL80ETC concert", 2, 2) to 5,
-            Item("Backstage passes to a TAFKAL80ETC concert", 1, 2) to 5,
+            Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 5, 2) to 5,
+            Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 4, 2) to 5,
+            Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 3, 2) to 5,
+            Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 2, 2) to 5,
+            Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 1, 2) to 5,
         ).map { (item, expectedQuality) ->
             dynamicTest("with $item updateQuality results in a quality of $expectedQuality") {
                 val app = getGildedRoseWithItem(item)
@@ -149,8 +149,8 @@ internal class GildedRoseTest {
 
         @TestFactory
         fun `Backstage passes Quality drops to 0 after the concert`() = listOf(
-            Item("Backstage passes to a TAFKAL80ETC concert", 0, 3) to 0,
-            Item("Backstage passes to a TAFKAL80ETC concert", -1, 0) to 0,
+            Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 0, 3) to 0,
+            Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, -1, 0) to 0,
         ).map { (item, expectedQuality) ->
             dynamicTest("with $item updateQuality results in a quality of $expectedQuality") {
                 val app = getGildedRoseWithItem(item)
@@ -177,26 +177,26 @@ internal class GildedRoseTest {
         // Given
         val items = listOf(
             Item("+5 Dexterity Vest", 10, 20), //
-            Item("Aged Brie", 2, 0), //
+            Item(AGED_BRIE, 2, 0), //
             Item("Elixir of the Mongoose", 5, 7), //
-            Item("Sulfuras, Hand of Ragnaros", 0, 80), //
-            Item("Sulfuras, Hand of Ragnaros", -1, 80),
-            Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
-            Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
-            Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
+            Item(SULFURAS_HAND_OF_RAGNAROS, 0, 80), //
+            Item(SULFURAS_HAND_OF_RAGNAROS, -1, 80),
+            Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 15, 20),
+            Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 10, 49),
+            Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 5, 49),
             // this conjured item does not work properly yet
             Item("Conjured Mana Cake", 3, 6)
         )
 
         val expectedResult = listOf(
             Item("+5 Dexterity Vest", 9, 19), //
-            Item("Aged Brie", 1, 1), //
+            Item(AGED_BRIE, 1, 1), //
             Item("Elixir of the Mongoose", 4, 6), //
-            Item("Sulfuras, Hand of Ragnaros", 0, 80), //
-            Item("Sulfuras, Hand of Ragnaros", -1, 80),
-            Item("Backstage passes to a TAFKAL80ETC concert", 14, 21),
-            Item("Backstage passes to a TAFKAL80ETC concert", 9, 50),
-            Item("Backstage passes to a TAFKAL80ETC concert", 4, 50),
+            Item(SULFURAS_HAND_OF_RAGNAROS, 0, 80), //
+            Item(SULFURAS_HAND_OF_RAGNAROS, -1, 80),
+            Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 14, 21),
+            Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 9, 50),
+            Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 4, 50),
             // this conjured item does not work properly yet
             Item("Conjured Mana Cake", 2, 5)
         )
