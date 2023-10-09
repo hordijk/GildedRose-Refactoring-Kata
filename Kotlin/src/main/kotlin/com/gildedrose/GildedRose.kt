@@ -11,26 +11,26 @@ class GildedRose(var items: List<Item>) {
     fun updateQuality() {
         for (i in items.indices) {
             val item = items[i]
-            if (item.name != AGED_BRIE && item.name != BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT) {
-                lowerQuality(item)
-            } else {
+            if (item.name == AGED_BRIE || item.name == BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT) {
                 if (item.isBelowMaxQuality()) {
                     item.quality = item.quality + 1
                     increaseQualityForBackstagePasses(item)
                 }
+            } else {
+                lowerQuality(item)
             }
 
             lowerSellIn(item)
 
             if (item.isSellInExpired()) {
-                if (item.name != AGED_BRIE) {
-                    if (item.name != BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT) {
-                        lowerQuality(item)
-                    } else {
-                        item.quality = 0
-                    }
-                } else {
+                if (item.name == AGED_BRIE) {
                     increaseQuality(item)
+                } else {
+                    if (item.name == BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT) {
+                        item.quality = 0
+                    } else {
+                        lowerQuality(item)
+                    }
                 }
             }
         }
