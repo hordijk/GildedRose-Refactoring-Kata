@@ -26,6 +26,9 @@ class GildedRose(var items: List<Item>) {
                         increaseQualityForBackstagePasses(item)
                     }
                 }
+                SULFURAS_HAND_OF_RAGNAROS -> {
+                    // Keep item as is
+                }
                 else -> {
                     lowerQuality(item)
                     if (item.isSellInExpired()) {
@@ -62,9 +65,7 @@ class GildedRose(var items: List<Item>) {
 
     private fun lowerQuality(item: Item) {
         if (item.isAboveMinQuality()) {
-            if (item.name != SULFURAS_HAND_OF_RAGNAROS) {
-                item.quality -= 1
-            }
+            item.quality -= 1
         }
     }
 
