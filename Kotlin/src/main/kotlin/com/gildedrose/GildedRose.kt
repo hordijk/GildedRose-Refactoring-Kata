@@ -14,10 +14,8 @@ class GildedRose(var items: List<Item>) {
             lowerSellIn(item)
             when (item.name) {
                 AGED_BRIE -> {
-                    increaseQuality(item)
-                    if (item.isSellInExpired()) {
-                        increaseQuality(item)
-                    }
+                    val changeQualityWith = if (item.isSellInExpired()) 2 else 1
+                    item.changeQualityWithinAllowedRange(changeQualityWith)
                 }
                 BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT -> {
                     if (item.isSellInExpired()) {
@@ -30,10 +28,8 @@ class GildedRose(var items: List<Item>) {
                     // Keep item as is
                 }
                 else -> {
-                    lowerQuality(item)
-                    if (item.isSellInExpired()) {
-                        lowerQuality(item)
-                    }
+                    val changeQualityWith = if (item.isSellInExpired()) -2 else -1
+                    item.changeQualityWithinAllowedRange(changeQualityWith)
                 }
             }
         }
@@ -46,27 +42,12 @@ class GildedRose(var items: List<Item>) {
     }
 
     private fun increaseQualityForBackstagePasses(item: Item) {
-        increaseQuality(item)
-
-        if (item.sellIn < 10) {
-            increaseQuality(item)
+        val changeQualityWith = when {
+            item.sellIn < 5 -> 3
+            item.sellIn < 10 -> 2
+            else -> 1
         }
-
-        if (item.sellIn < 5) {
-            increaseQuality(item)
-        }
-    }
-
-    private fun increaseQuality(item: Item) {
-        if (item.isBelowMaxQuality()) {
-            item.quality += 1
-        }
-    }
-
-    private fun lowerQuality(item: Item) {
-        if (item.isAboveMinQuality()) {
-            item.quality -= 1
-        }
+        item.changeQualityWithinAllowedRange(changeQualityWith)
     }
 
 }
