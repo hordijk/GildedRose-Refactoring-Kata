@@ -12,11 +12,10 @@ class GildedRose(var items: List<Item>) {
         for (i in items.indices) {
             val item = items[i]
             lowerSellIn(item)
-            if (item.name == AGED_BRIE || item.name == BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT) {
-                if (item.isBelowMaxQuality()) {
-                    item.quality = item.quality + 1
-                    increaseQualityForBackstagePasses(item)
-                }
+            if (item.name == AGED_BRIE) {
+                increaseQuality(item)
+            } else if (item.name == BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT) {
+                increaseQualityForBackstagePasses(item)
             } else {
                 lowerQuality(item)
             }
@@ -24,12 +23,10 @@ class GildedRose(var items: List<Item>) {
             if (item.isSellInExpired()) {
                 if (item.name == AGED_BRIE) {
                     increaseQuality(item)
+                } else if (item.name == BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT) {
+                    item.quality = 0
                 } else {
-                    if (item.name == BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT) {
-                        item.quality = 0
-                    } else {
-                        lowerQuality(item)
-                    }
+                    lowerQuality(item)
                 }
             }
         }
@@ -42,14 +39,14 @@ class GildedRose(var items: List<Item>) {
     }
 
     private fun increaseQualityForBackstagePasses(item: Item) {
-        if (item.name == BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT) {
-            if (item.sellIn < 10) {
-                increaseQuality(item)
-            }
+        increaseQuality(item)
 
-            if (item.sellIn < 5) {
-                increaseQuality(item)
-            }
+        if (item.sellIn < 10) {
+            increaseQuality(item)
+        }
+
+        if (item.sellIn < 5) {
+            increaseQuality(item)
         }
     }
 
