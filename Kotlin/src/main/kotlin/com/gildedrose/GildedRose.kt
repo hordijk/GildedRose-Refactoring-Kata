@@ -11,6 +11,7 @@ class GildedRose(var items: List<Item>) {
     fun updateQuality() {
         for (i in items.indices) {
             val item = items[i]
+            lowerSellIn(item)
             if (item.name == AGED_BRIE || item.name == BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT) {
                 if (item.isBelowMaxQuality()) {
                     item.quality = item.quality + 1
@@ -19,8 +20,6 @@ class GildedRose(var items: List<Item>) {
             } else {
                 lowerQuality(item)
             }
-
-            lowerSellIn(item)
 
             if (item.isSellInExpired()) {
                 if (item.name == AGED_BRIE) {
@@ -44,11 +43,11 @@ class GildedRose(var items: List<Item>) {
 
     private fun increaseQualityForBackstagePasses(item: Item) {
         if (item.name == BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT) {
-            if (item.sellIn < 11) {
+            if (item.sellIn < 10) {
                 increaseQuality(item)
             }
 
-            if (item.sellIn < 6) {
+            if (item.sellIn < 5) {
                 increaseQuality(item)
             }
         }
