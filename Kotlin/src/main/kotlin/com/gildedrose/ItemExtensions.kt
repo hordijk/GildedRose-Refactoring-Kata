@@ -7,3 +7,7 @@ fun Item.isBelowMaxQuality() : Boolean {
 fun Item.isAboveMinQuality() : Boolean {
     return this.quality > 0
 }
+
+fun Item.isSellInExpired() : Boolean {
+    return this.sellIn < 0
+}

@@ -22,7 +22,7 @@ class GildedRose(var items: List<Item>) {
 
             lowerSellIn(item)
 
-            if (item.sellIn < 0) {
+            if (item.isSellInExpired()) {
                 if (item.name != AGED_BRIE) {
                     if (item.name != BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT) {
                         lowerQuality(item)

@@ -33,4 +33,18 @@ class ItemExtensionsTest {
         val item = Item("brandName", 0, quality)
         assertFalse(item.isAboveMinQuality())
     }
+
+    @ParameterizedTest(name = "For item with sellIn: {0} isSellInExpired is false")
+    @ValueSource(ints = [0, 1])
+    fun `isSellInExpired is false`(sellIn: Int) {
+        val item = Item("brandName", sellIn, 0)
+        assertFalse(item.isSellInExpired())
+    }
+
+    @ParameterizedTest(name = "For item with sellIn: {0} isSellInExpired is true")
+    @ValueSource(ints = [-1])
+    fun `isSellInExpired is true`(sellIn: Int) {
+        val item = Item("brandName", sellIn, 0)
+        assertTrue(item.isSellInExpired())
+    }
 }
