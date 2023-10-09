@@ -14,7 +14,7 @@ class GildedRose(var items: List<Item>) {
             if (item.name != AGED_BRIE && item.name != BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT) {
                 if (item.quality > 0) {
                     if (item.name != SULFURAS_HAND_OF_RAGNAROS) {
-                        item.quality = item.quality - 1
+                        item.quality -= 1
                     }
                 }
             } else {
@@ -24,13 +24,13 @@ class GildedRose(var items: List<Item>) {
                     if (item.name == BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT) {
                         if (item.sellIn < 11) {
                             if (item.quality < 50) {
-                                item.quality = item.quality + 1
+                                item.quality += 1
                             }
                         }
 
                         if (item.sellIn < 6) {
                             if (item.quality < 50) {
-                                item.quality = item.quality + 1
+                                item.quality += 1
                             }
                         }
                     }
@@ -38,7 +38,7 @@ class GildedRose(var items: List<Item>) {
             }
 
             if (item.name != SULFURAS_HAND_OF_RAGNAROS) {
-                item.sellIn = item.sellIn - 1
+                item.sellIn -= 1
             }
 
             if (item.sellIn < 0) {
@@ -46,15 +46,15 @@ class GildedRose(var items: List<Item>) {
                     if (item.name != BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT) {
                         if (item.quality > 0) {
                             if (item.name != SULFURAS_HAND_OF_RAGNAROS) {
-                                item.quality = item.quality - 1
+                                item.quality -= 1
                             }
                         }
                     } else {
-                        item.quality = item.quality - item.quality
+                        item.quality = 0
                     }
                 } else {
                     if (item.quality < 50) {
-                        item.quality = item.quality + 1
+                        item.quality += 1
                     }
                 }
             }
