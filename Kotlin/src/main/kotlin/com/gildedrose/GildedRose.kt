@@ -15,24 +15,20 @@ class GildedRose(var items: List<Item>) {
             when (item.name) {
                 AGED_BRIE -> {
                     increaseQuality(item)
+                    if (item.isSellInExpired()) {
+                        increaseQuality(item)
+                    }
                 }
                 BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT -> {
-                    increaseQualityForBackstagePasses(item)
+                    if (item.isSellInExpired()) {
+                        item.quality = 0
+                    } else {
+                        increaseQualityForBackstagePasses(item)
+                    }
                 }
                 else -> {
                     lowerQuality(item)
-                }
-            }
-
-            if (item.isSellInExpired()) {
-                when (item.name) {
-                    AGED_BRIE -> {
-                        increaseQuality(item)
-                    }
-                    BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT -> {
-                        item.quality = 0
-                    }
-                    else -> {
+                    if (item.isSellInExpired()) {
                         lowerQuality(item)
                     }
                 }
