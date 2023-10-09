@@ -12,26 +12,18 @@ class GildedRose(var items: List<Item>) {
         for (i in items.indices) {
             val item = items[i]
             if (item.name != AGED_BRIE && item.name != BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT) {
-                if (item.isAboveMinQuality()) {
-                    if (item.name != SULFURAS_HAND_OF_RAGNAROS) {
-                        item.quality -= 1
-                    }
-                }
+                lowerQuality(item)
             } else {
                 if (item.isBelowMaxQuality()) {
                     item.quality = item.quality + 1
 
                     if (item.name == BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT) {
                         if (item.sellIn < 11) {
-                            if (item.isBelowMaxQuality()) {
-                                item.quality += 1
-                            }
+                            increaseQuality(item)
                         }
 
                         if (item.sellIn < 6) {
-                            if (item.isBelowMaxQuality()) {
-                                item.quality += 1
-                            }
+                            increaseQuality(item)
                         }
                     }
                 }
@@ -44,19 +36,27 @@ class GildedRose(var items: List<Item>) {
             if (item.sellIn < 0) {
                 if (item.name != AGED_BRIE) {
                     if (item.name != BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT) {
-                        if (item.isAboveMinQuality()) {
-                            if (item.name != SULFURAS_HAND_OF_RAGNAROS) {
-                                item.quality -= 1
-                            }
-                        }
+                        lowerQuality(item)
                     } else {
                         item.quality = 0
                     }
                 } else {
-                    if (item.isBelowMaxQuality()) {
-                        item.quality += 1
-                    }
+                    increaseQuality(item)
                 }
+            }
+        }
+    }
+
+    private fun increaseQuality(item: Item) {
+        if (item.isBelowMaxQuality()) {
+            item.quality += 1
+        }
+    }
+
+    private fun lowerQuality(item: Item) {
+        if (item.isAboveMinQuality()) {
+            if (item.name != SULFURAS_HAND_OF_RAGNAROS) {
+                item.quality -= 1
             }
         }
     }
