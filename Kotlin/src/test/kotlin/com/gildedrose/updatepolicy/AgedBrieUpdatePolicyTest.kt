@@ -18,7 +18,7 @@ class AgedBrieUpdatePolicyTest {
         Item(AGED_BRIE, 0, 0) to 2,
         Item(AGED_BRIE, -1, 0) to 2
     ).map { (item, expectedQuality) ->
-        DynamicTest.dynamicTest("with $item updateQuality results in a quality of $expectedQuality") {
+        DynamicTest.dynamicTest("with $item update results in a quality of $expectedQuality") {
             AgedBrieUpdatePolicy().update(item)
             assertEquals(expectedQuality, item.quality)
         }

@@ -13,7 +13,7 @@ class BackstagePassesUpdatePolicyTest {
         Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 11, 0) to 1,
         Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 12, 2) to 3
     ).map { (item, expectedQuality) ->
-        DynamicTest.dynamicTest("with $item updateQuality results in a quality of $expectedQuality") {
+        DynamicTest.dynamicTest("with $item update results in a quality of $expectedQuality") {
             BackstagePassesUpdatePolicy().update(item)
             assertEquals(expectedQuality, item.quality)
         }
@@ -27,7 +27,7 @@ class BackstagePassesUpdatePolicyTest {
         Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 7, 2) to 4,
         Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 6, 2) to 4,
     ).map { (item, expectedQuality) ->
-        DynamicTest.dynamicTest("with $item updateQuality results in a quality of $expectedQuality") {
+        DynamicTest.dynamicTest("with $item update results in a quality of $expectedQuality") {
             BackstagePassesUpdatePolicy().update(item)
             assertEquals(expectedQuality, item.quality)
         }
@@ -41,7 +41,7 @@ class BackstagePassesUpdatePolicyTest {
         Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 2, 2) to 5,
         Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 1, 2) to 5,
     ).map { (item, expectedQuality) ->
-        DynamicTest.dynamicTest("with $item updateQuality results in a quality of $expectedQuality") {
+        DynamicTest.dynamicTest("with $item update results in a quality of $expectedQuality") {
             BackstagePassesUpdatePolicy().update(item)
             assertEquals(expectedQuality, item.quality)
         }
@@ -52,7 +52,7 @@ class BackstagePassesUpdatePolicyTest {
         Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 0, 3) to 0,
         Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, -1, 0) to 0,
     ).map { (item, expectedQuality) ->
-        DynamicTest.dynamicTest("with $item updateQuality results in a quality of $expectedQuality") {
+        DynamicTest.dynamicTest("with $item update results in a quality of $expectedQuality") {
             BackstagePassesUpdatePolicy().update(item)
             assertEquals(expectedQuality, item.quality)
         }

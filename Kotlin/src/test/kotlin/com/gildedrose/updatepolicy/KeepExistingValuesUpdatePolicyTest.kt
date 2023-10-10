@@ -14,7 +14,7 @@ class KeepExistingValuesUpdatePolicyTest {
         Item(SULFURAS_HAND_OF_RAGNAROS, -1, 80) to Item(SULFURAS_HAND_OF_RAGNAROS, -1, 80),
         Item("brand", 0, 23) to Item("brand", 0, 23)
     ).map { (item, expected) ->
-        DynamicTest.dynamicTest("with $item updateQuality keep existing values like $expected") {
+        DynamicTest.dynamicTest("with $item update keep existing values like $expected") {
             item shouldBeEqualToComparingFields expected
         }
     }
