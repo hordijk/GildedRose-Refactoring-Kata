@@ -2,6 +2,7 @@ package com.gildedrose
 
 import com.gildedrose.ProductNames.AGED_BRIE
 import com.gildedrose.ProductNames.BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT
+import com.gildedrose.ProductNames.CONJURED_MANA_CAKE
 import com.gildedrose.ProductNames.SULFURAS_HAND_OF_RAGNAROS
 import io.kotest.matchers.equality.shouldBeEqualToComparingFields
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -63,18 +64,6 @@ internal class GildedRoseTest {
         }
     }
     @TestFactory
-    fun `Conjured items degrade in Quality twice as fast as normal items`() = listOf(
-        Item("Conjured Mana Cake", 10, 20) to 19, // TODO this should be 18, however this is not implemented yet
-        Item("Conjured Mana Cake", 1, 1) to 0,
-    ).map { (item, expectedQuality) ->
-        dynamicTest("with $item updateQuality results in a quality of $expectedQuality") {
-            val app = getGildedRoseWithItem(item)
-            app.updateQuality()
-            assertEquals(expectedQuality, app.items[0].quality)
-        }
-    }
-
-    @TestFactory
     fun `updateQuality with texttest fixture matches expected output`(): Stream<DynamicTest> {
         // Given
         val items = listOf(
@@ -86,8 +75,7 @@ internal class GildedRoseTest {
             Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 15, 20),
             Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 10, 49),
             Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 5, 49),
-            // this conjured item does not work properly yet
-            Item("Conjured Mana Cake", 3, 6)
+            Item(CONJURED_MANA_CAKE, 3, 6)
         )
 
         val expectedResult = listOf(
@@ -99,8 +87,7 @@ internal class GildedRoseTest {
             Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 14, 21),
             Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 9, 50),
             Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 4, 50),
-            // this conjured item does not work properly yet
-            Item("Conjured Mana Cake", 2, 5)
+            Item(CONJURED_MANA_CAKE, 2, 4)
         )
         val app = GildedRose(items)
         // When

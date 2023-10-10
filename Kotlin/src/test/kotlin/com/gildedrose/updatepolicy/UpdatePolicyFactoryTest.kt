@@ -31,6 +31,14 @@ class UpdatePolicyFactoryTest {
         updatePolicyForItem.shouldBeTypeOf<BackstagePassesUpdatePolicy>()
     }
 
+    @ParameterizedTest(name = "For item with name: {0} conjuredUpdatePolicy is used")
+    @ValueSource(strings = ["Conjured", "Conjured item"])
+    fun `conjuredUpdatePolicy is returned for product names starting with Conjured`(name: String) {
+        val item = Item(name, 0, 0)
+        val updatePolicyForItem = UpdatePolicyFactory.updatePolicyForItem(item)
+        updatePolicyForItem.shouldBeTypeOf<ConjuredUpdatePolicy>()
+    }
+
     @ParameterizedTest(name = "For item with name: {0} DefaultUpdatePolicy is used")
     @ValueSource(strings = ["custom", "not mapped"])
     fun `defaultUpdatePolicy is returned for names not mapped`(name: String) {
