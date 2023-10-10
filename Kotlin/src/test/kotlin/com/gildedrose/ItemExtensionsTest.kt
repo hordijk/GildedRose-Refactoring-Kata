@@ -11,6 +11,7 @@ class ItemExtensionsTest {
     @ValueSource(ints = [0, 1])
     fun `isSellInExpired is false`(sellIn: Int) {
         val item = Item("brandName", sellIn, 0)
+
         assertFalse(item.isSellInExpired())
     }
 
@@ -18,6 +19,7 @@ class ItemExtensionsTest {
     @ValueSource(ints = [-1])
     fun `isSellInExpired is true`(sellIn: Int) {
         val item = Item("brandName", sellIn, 0)
+
         assertTrue(item.isSellInExpired())
     }
 
@@ -38,5 +40,17 @@ class ItemExtensionsTest {
         item.changeQualityWithinAllowedRange(change)
 
         assertEquals(expectedQuality, item.quality)
+    }
+
+    @ParameterizedTest(name = "For item with sellIn: {0} invoke decreaseSellIn results in sellIn {2}")
+    @CsvSource(
+        "1, 0",
+        "0, -1",
+    )
+    fun `decreaseSellIn decrease sell by one`(sellIn: Int, expectedSellIn: Int) {
+        val item = Item("brandName", sellIn, 0)
+        item.decreaseSellIn()
+
+        assertEquals(expectedSellIn, item.sellIn)
     }
 }
