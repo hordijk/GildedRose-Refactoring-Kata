@@ -46,7 +46,7 @@ class ItemExtensionsTest {
         assertEquals(expectedQuality, item.quality)
     }
 
-    @ParameterizedTest(name = "For item with sellIn: {0} invoke decreaseSellIn results in sellIn {2}")
+    @ParameterizedTest(name = "For item with sellIn: {0} invoke decreaseSellIn results in sellIn {1}")
     @CsvSource(
         "1, 0",
         "0, -1",
