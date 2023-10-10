@@ -35,9 +35,13 @@ class ItemExtensionsTest {
         "50, 0, 50",
         "50, 1, 50",
     )
-    fun `changeQualityWithinAllowedRange passes`(quality: Int, change: Int, expectedQuality: Int) {
+    fun `changeQualityWithinAllowedRangeWith change quality within boundaries (never negative and not above 50)`(
+        quality: Int,
+        change: Int,
+        expectedQuality: Int
+    ) {
         val item = Item("brandName", 0, quality)
-        item.changeQualityWithinAllowedRange(change)
+        item.changeQualityWithinAllowedRangeWith(change)
 
         assertEquals(expectedQuality, item.quality)
     }

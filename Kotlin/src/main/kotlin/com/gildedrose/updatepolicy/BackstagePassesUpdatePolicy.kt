@@ -1,7 +1,7 @@
 package com.gildedrose.updatepolicy
 
 import com.gildedrose.Item
-import com.gildedrose.changeQualityWithinAllowedRange
+import com.gildedrose.changeQualityWithinAllowedRangeWith
 import com.gildedrose.isSellInExpired
 
 class BackstagePassesUpdatePolicy : BaseUpdatePolicy() {
@@ -15,7 +15,7 @@ class BackstagePassesUpdatePolicy : BaseUpdatePolicy() {
                 item.sellIn < 10 -> 2
                 else -> 1
             }
-            item.changeQualityWithinAllowedRange(changeQualityWith)
+            item.changeQualityWithinAllowedRangeWith(changeQualityWith)
         }
     }
 }

@@ -8,7 +8,7 @@ fun Item.decreaseSellIn() {
     this.sellIn -= 1
 }
 
-fun Item.changeQualityWithinAllowedRange(change: Int) {
+fun Item.changeQualityWithinAllowedRangeWith(change: Int) {
     val newQuality = this.quality + change
     this.quality = newQuality.coerceIn(0, 50)
 }
