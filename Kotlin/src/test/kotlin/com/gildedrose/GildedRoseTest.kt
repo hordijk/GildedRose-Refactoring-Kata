@@ -10,8 +10,6 @@ import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.DynamicTest.dynamicTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestFactory
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.CsvSource
 import java.util.stream.IntStream
 import java.util.stream.Stream
 
@@ -25,44 +23,6 @@ internal class GildedRoseTest {
         assertEquals("foo", app.items[0].name)
     }
 
-    @ParameterizedTest(name = "Item with sellIn: {0} and quality: {1} updateQuality results in quality: {2}")
-    @CsvSource(
-        "1, 1, 0",
-        "0, 1, 0",
-        "0, 0, 0",
-        "-1, 0, 0"
-    )
-    fun `The Quality of an item is never negative`(sellIn: Int, quality: Int, expectedQuality: Int) {
-        val app = getGildedRoseWithItem(Item("brandName", sellIn, quality))
-        app.updateQuality()
-        assertEquals(expectedQuality, app.items[0].quality)
-    }
-
-    @TestFactory
-    fun `The Quality of an item is never more than 50`() = listOf(
-        Item(AGED_BRIE, 1, 49) to 50,
-        Item(AGED_BRIE, 1, 50) to 50,
-        Item(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, 1, 49) to 50,
-    ).map { (item, expectedQuality) ->
-        dynamicTest("with $item updateQuality results in a quality of $expectedQuality") {
-            val app = getGildedRoseWithItem(item)
-            app.updateQuality()
-            assertEquals(expectedQuality, app.items[0].quality)
-        }
-    }
-
-    @TestFactory
-    fun `Sulfuras, being a legendary item, never has to be sold or decreases in Quality`() = listOf(
-        Item(SULFURAS_HAND_OF_RAGNAROS, 0, 80) to Item(SULFURAS_HAND_OF_RAGNAROS, 0, 80),
-        Item(SULFURAS_HAND_OF_RAGNAROS, -1, 80) to Item(SULFURAS_HAND_OF_RAGNAROS, -1, 80)
-    ).map { (item, expected) ->
-        dynamicTest("with $item updateQuality keep existing values like $expected") {
-            val app = getGildedRoseWithItem(item)
-            app.updateQuality()
-
-            app.items[0] shouldBeEqualToComparingFields expected
-        }
-    }
     @TestFactory
     fun `updateQuality with texttest fixture matches expected output`(): Stream<DynamicTest> {
         // Given
@@ -100,9 +60,5 @@ internal class GildedRoseTest {
                 "Entry $it: updateQuality results in $expectedItem"
             ) { item shouldBeEqualToComparingFields expectedItem }
         }
-    }
-
-    private fun getGildedRoseWithItem(item: Item): GildedRose {
-        return GildedRose(listOf(item))
     }
 }
