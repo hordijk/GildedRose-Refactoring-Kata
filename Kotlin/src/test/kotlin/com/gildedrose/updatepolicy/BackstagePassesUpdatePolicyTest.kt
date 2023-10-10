@@ -1,7 +1,7 @@
 package com.gildedrose.updatepolicy
 
-import com.gildedrose.BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT
 import com.gildedrose.Item
+import com.gildedrose.ProductNames.BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.Test

@@ -1,7 +1,7 @@
 package com.gildedrose.updatepolicy
 
 import com.gildedrose.Item
-import com.gildedrose.SULFURAS_HAND_OF_RAGNAROS
+import com.gildedrose.ProductNames.SULFURAS_HAND_OF_RAGNAROS
 import io.kotest.matchers.equality.shouldBeEqualToComparingFields
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.TestFactory

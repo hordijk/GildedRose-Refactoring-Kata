@@ -1,5 +1,8 @@
 package com.gildedrose
 
+import com.gildedrose.ProductNames.AGED_BRIE
+import com.gildedrose.ProductNames.BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT
+import com.gildedrose.ProductNames.SULFURAS_HAND_OF_RAGNAROS
 import io.kotest.matchers.equality.shouldBeEqualToComparingFields
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DynamicTest

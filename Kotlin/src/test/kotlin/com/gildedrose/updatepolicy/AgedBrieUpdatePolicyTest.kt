@@ -1,7 +1,7 @@
 package com.gildedrose.updatepolicy
 
-import com.gildedrose.AGED_BRIE
 import com.gildedrose.Item
+import com.gildedrose.ProductNames.AGED_BRIE
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.Test
